@@ -6,6 +6,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//DB CONNECTION
+const Sequelize = require('sequelize');
+const config = require('./config/config');
+
+const env = process.env.NODE_ENV || 'development';
+const sequelize = new Sequelize(config[env]);
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -42,12 +49,16 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+sequelize.authenticate().then(() => {console.log('Conexión con la DB exitosa.')})
+	.catch(err => {console.log('Eror al conectar con la DB: ',err)}
+);
 
 console.log('TEST_ENV: ', process.env.TEST_ENV);
 
