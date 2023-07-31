@@ -3,7 +3,7 @@ var router = express.Router();
 var TipoHabitacionController = require('./TipoHabitacionController');
 const multer  = require('multer');
 const upload = multer();
-const { validateCreate } = require('./TipoHabitacionValidate');
+const { validateCreate, validateEdit } = require('./TipoHabitacionValidate');
 
 
 /* GET home page. */
@@ -15,5 +15,13 @@ router.get('/', function(req, res, next) {
 router.get('/listar', TipoHabitacionController.listarTipoHabitaciones);   
 
 router.post('/agregar', upload.none(), validateCreate, TipoHabitacionController.agregarTipoHabitaciones);
+
+router.post('/:id/editar', upload.none(), validateEdit, TipoHabitacionController.editarTipoHabitaciones);
+
+router.post('/:id/habilitar', upload.none(), TipoHabitacionController.habilitarTipoHabitaciones);
+
+router.post('/:id/deshabilitar', upload.none(), TipoHabitacionController.deshabilitarTipoHabitaciones);
+
+router.get('/:id', TipoHabitacionController.obtenerTipoHabitacion);
 
 module.exports = router;
