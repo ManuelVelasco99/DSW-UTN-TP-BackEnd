@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             type: DataTypes.INTEGER
         },
+        estado : {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true,
+  			allowNull: false
+		}
     }, {
         sequelize,
         modelName: 'TipoHabitacion',
