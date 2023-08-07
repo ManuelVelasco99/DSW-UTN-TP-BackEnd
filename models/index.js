@@ -26,12 +26,43 @@ fs
   });
 
 Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+    if (db[modelName].associate) {
+        db[modelName].associate(db);
+    }
+
+    db[modelName].findByPkHelper = async (id, res) => {
+        let element;
+        try{
+            element =  await db[modelName].findByPk(id);
+            console.log('db respuesta', element);
+            if(!element){
+                throw new Error(`No existe el elemento con id ${id}`);
+            }
+        }
+        catch(error){
+            if(error.message.startsWith('No existe el elemento con id')){
+                res.json({data : error.message}, 404);
+            }
+        }
+
+    return element;
+};
 });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+/*
+db[model.name].findByPk = asyncHandler(async (id) => {
+    let element = await db.TipoHabitacion.findByPk(id);
+
+    if(!element){
+        throw new Error(`No existe el elemento con id ${id}`);
+    }
+
+    return element;
+});
+*/
+
 
 module.exports = db;
