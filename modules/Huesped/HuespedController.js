@@ -9,7 +9,7 @@ exports.listarHuespedes = asyncHandler(async (req, res, next) => {
 
 exports.obtenerHueseped = asyncHandler(async (req, res, next) => {
     let id = req.params.id;
-    let huesped = await db.Huesped.findByPk(id);
+    let huesped = await db.Huesped.findByPkHelper(id);
 
     res.json({data : huesped});
 });
@@ -56,7 +56,7 @@ exports.editarHuespedes = asyncHandler(async (req, res, next) => {
     let telefono = req.body.telefono;
     let email = req.body.email;
 
-    let huesped = await db.Huesped.findByPk(id);
+    let huesped = await db.Huesped.findByPkHelper(id);
 
     huesped.tipoDocumento= tipoDocumento;
     huesped.nroDocumento= nroDocumento;
@@ -73,7 +73,7 @@ exports.editarHuespedes = asyncHandler(async (req, res, next) => {
 
 exports.habilitarHuespedes = asyncHandler(async (req, res, next) => {
     let id = req.params.id;
-    let huesped = await db.Huesped.findByPk(id);
+    let huesped = await db.Huesped.findByPkHelper(id);
     huesped.estado = true;
     huesped.save();
 
@@ -82,7 +82,7 @@ exports.habilitarHuespedes = asyncHandler(async (req, res, next) => {
 
 exports.deshabilitarHuespedes = asyncHandler(async (req, res, next) => {
     let id = req.params.id;
-    let huesped = await db.Huesped.findByPk(id);
+    let huesped = await db.Huesped.findByPkHelper(id);
     huesped.estado = false;
     huesped.save();
 
