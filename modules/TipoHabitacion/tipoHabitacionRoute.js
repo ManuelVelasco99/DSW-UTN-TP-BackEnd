@@ -4,7 +4,7 @@ var TipoHabitacionController = require('./TipoHabitacionController');
 const multer  = require('multer');
 const upload = multer();
 const { validateCreate, validateEdit } = require('./TipoHabitacionValidate');
-
+const precioTipoHabitacionRoute = require('./PrecioTipoHabitacion/PrecioTipoHabitacionRoute')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -23,5 +23,7 @@ router.post('/:id/habilitar', upload.none(), TipoHabitacionController.habilitarT
 router.post('/:id/deshabilitar', upload.none(), TipoHabitacionController.deshabilitarTipoHabitaciones);
 
 router.get('/:id', TipoHabitacionController.obtenerTipoHabitacion);
+
+router.use('/:tipoHabitacionId/precio-tipo-habitacion', precioTipoHabitacionRoute);
 
 module.exports = router;
