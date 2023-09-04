@@ -14,9 +14,7 @@ const env = process.env.NODE_ENV || 'development';
 const sequelize = new Sequelize(config[env]);
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var tipoHabitacionRouter = require('./modules/TipoHabitacion/tipoHabitacionRoute');
+
 
 var app = express();
 
@@ -32,9 +30,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+//ROUTES
+let habitacionRouter     = require('./modules/Habitacion/HabitacionRoute');
+let tipoHabitacionRouter = require('./modules/TipoHabitacion/tipoHabitacionRoute');
+app.use('/habitacion', habitacionRouter);
 app.use('/tipo-habitacion', tipoHabitacionRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
