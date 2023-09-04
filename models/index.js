@@ -30,10 +30,10 @@ Object.keys(db).forEach(modelName => {
         db[modelName].associate(db);
     }
 
-    db[modelName].findByPkHelper = async (id, res) => {
+    db[modelName].findByPkHelper = async (id, res, options = {}) => {
         let element;
         try{
-            element =  await db[modelName].findByPk(id);
+            element =  await db[modelName].findByPk(id, options);
             console.log('db respuesta', element);
             if(!element){
                 throw new Error(`No existe el elemento con id ${id}`);
@@ -50,7 +50,6 @@ Object.keys(db).forEach(modelName => {
 });
 
 db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
 /*
 db[model.name].findByPk = asyncHandler(async (id) => {
