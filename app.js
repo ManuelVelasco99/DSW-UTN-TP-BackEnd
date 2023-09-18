@@ -33,8 +33,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //ROUTES
 let habitacionRouter     = require('./modules/Habitacion/HabitacionRoute');
 let tipoHabitacionRouter = require('./modules/TipoHabitacion/tipoHabitacionRoute');
+let huespedRouter        = require('./modules/Huesped/HuespedRoute');
 app.use('/habitacion', habitacionRouter);
 app.use('/tipo-habitacion', tipoHabitacionRouter);
+app.use('/huesped', huespedRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
