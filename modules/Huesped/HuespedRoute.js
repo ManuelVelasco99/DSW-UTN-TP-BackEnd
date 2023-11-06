@@ -3,7 +3,7 @@ var router = express.Router();
 var HuespedController = require('./HuespedController');
 const multer  = require('multer');
 const upload = multer();
-const { validateCreate } = require('./HuespedValidate');
+const { validateCreate, validateEdit } = require('./HuespedValidate');
 
 
 /* GET home page. */

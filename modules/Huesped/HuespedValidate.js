@@ -26,3 +26,5 @@ const validateEdit = [
         validateResult(req, res, next)
     }
 ];
+
+module.exports = { validateCreate, validateEdit };
