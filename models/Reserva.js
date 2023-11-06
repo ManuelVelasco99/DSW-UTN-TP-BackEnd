@@ -6,7 +6,6 @@ const {
 const Reserva = require('./Reserva');
 
 module.exports = (sequelize, DataTypes) => {
-  let Reserva = require("./Reserva");
   class Reserva extends Model {
     /**
      * Helper method for defining associations.
@@ -33,21 +32,23 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				autoIncrement: false,
 				primaryKey: true,
-				type: Sequelize.DataTypes.INTEGER
+				type: DataTypes.INTEGER
 			  },
 			  id_huesped: {
 				allowNull: false,
-				type: Sequelize.DataTypes.INTEGER,
+				type: DataTypes.INTEGER,
 				references: {
 					model: {
 					  tableName: 'huespedes',
-					},
+					  },
 					key: 'id'
+          }
 				},
         numero_habitacion: {
           allowNull: false,
-          type: Sequelize.DataTypes.INTEGER,
+          type: DataTypes.INTEGER,
           references:{
+            model: {
             tableName: 'habitaciones',
           },
           key:'numero'
@@ -56,37 +57,37 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
           autoIncrement: false,
           primaryKey: false,
-          type: Sequelize.DataTypes.DATE
+          type: DataTypes.DATE
         },
         fecha_hasta: {
           allowNull: false,
           autoIncrement: false,
           primaryKey: false,
-          type: Sequelize.DataTypes.DATE
+          type: DataTypes.DATE
         },
         fecha_pago: {
           allowNull: false,
           autoIncrement: false,
           primaryKey: false,
-          type: Sequelize.DataTypes.DATE
+          type: DataTypes.DATE
         },
         fecha_creacion: {
           allowNull: false,
           autoIncrement: false,
           primaryKey: false,
-          type: Sequelize.DataTypes.DATE
+          type: DataTypes.DATE
         },
         monto: {
           allowNull: false,
           autoIncrement: false,
           primaryKey: false,
-          type: Sequelize.DataTypes.FLOAT
+          type: DataTypes.FLOAT
         },
         estado: {
           allowNull: false,
           autoIncrement: false,
           primaryKey: false,
-          type: Sequelize.DataTypes.ENUM
+          type: DataTypes.ENUM('PENDIENTE', 'PAGADA', 'CANCELADA')
         },
       },
   },
