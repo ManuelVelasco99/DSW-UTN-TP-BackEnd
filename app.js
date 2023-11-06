@@ -5,6 +5,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
+var bodyParser = require("body-parser");
+
 
 //DB CONNECTION
 const Sequelize = require('sequelize');
@@ -17,6 +20,8 @@ const sequelize = new Sequelize(config[env]);
 
 
 var app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 var port = process.env.APP_PORT || 3000;
 
@@ -31,8 +36,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //ROUTES
+let authRouter           = require('./modules/Auth/authRoute');
 let habitacionRouter     = require('./modules/Habitacion/HabitacionRoute');
 let tipoHabitacionRouter = require('./modules/TipoHabitacion/tipoHabitacionRoute');
+app.use('/auth', authRouter);
 app.use('/habitacion', habitacionRouter);
 app.use('/tipo-habitacion', tipoHabitacionRouter);
 
